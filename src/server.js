@@ -23,5 +23,20 @@ bot.on("message", (msg) => {
   const {
     chat: { id },
   } = msg;
-  bot.sendMessage(id, "превед!!1", { reply_markup: { keyboard: list } });
+  bot.sendMessage(id, "превед!!1", { reply_markup: { inline_keyboard: list } });
+});
+bot.on("callback_query", (query) => {
+  const {
+    message: {
+      chat: { id },
+    },
+  } = query;
+  console.log(query);
+  bot.answerInlineQuery(
+    id,
+    [{ id: 0, type: "article", message_text: "ok", title: "test" }],
+    {
+      reply_markup: { inline_keyboard: list },
+    }
+  );
 });
