@@ -18,6 +18,9 @@ app.post("/", (req, res) => {
   list = req.body.map((name, index) => [{ text: name, callback_data: index }]);
   res.send("done");
 });
+app.get("/menu", (req, res) => {
+  res.send(list);
+});
 
 bot.on("message", (msg) => {
   const {
