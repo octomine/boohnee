@@ -1,16 +1,18 @@
-import React from "react";
-import "./App.css";
+import React, { useState } from "react";
 
-import { Menu } from "./components/menu";
-import { getMenuFx } from "./components/menu/store";
+import { BoxV } from "./components/common/box";
+// import { RadioGroup } from "./components/radio-group";
+import { Menu } from "./components/menu/Menu";
 
 function App() {
-  getMenuFx();
-  
+  const rg = [{ label: "меню" }, { label: "заказ" }];
+
+  const [selected, setSelected] = useState(0);
+
   return (
-    <div className="App">
+    <BoxV>
       <Menu></Menu>
-    </div>
+    </BoxV>
   );
 }
 

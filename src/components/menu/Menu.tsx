@@ -1,27 +1,27 @@
 import React from "react";
 import { useStore } from "effector-react";
 
-import { send } from "../../services/network";
-import { LineMenu } from "./elements/line-menu";
-import { LineAdd } from "./elements/line-add";
+import { BoxV } from "../common/box";
+import { Button } from "../common/button";
+
+import { MenuItem } from "./elements/menu-item";
 
 import { $menu } from "./store";
-import { Container } from "./styled";
 
-export const Menu: React.FC = () => {
-  const menu: string[] = useStore($menu);
+export const Menu: React.FC<{}> = () => {
+  const list = useStore($menu);
 
-  const apply = () => {
-    send(menu).then((data) => console.log(data));
+  const onItem = (n: number) => {
+    console.log(`onItem: ${n}`);
   };
 
   return (
-    <Container>
-      <div onClick={() => apply()}>apply</div>
-      {menu.map((name: string) => (
-        <LineMenu name={name}></LineMenu>
+    <BoxV>
+      <Button>сохранить</Button>
+      <Button>добавить</Button>
+      {list.map((item, index) => (
+        <MenuItem onClick={() => onItem(index)}>{item}</MenuItem>
       ))}
-      <LineAdd></LineAdd>
-    </Container>
+    </BoxV>
   );
 };
