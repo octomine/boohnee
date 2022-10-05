@@ -1,6 +1,5 @@
 import React from "react";
 
-import { BoxH } from "../../../common/box";
 import { Button } from "../../../common/button";
 
 import { MenuItemProps } from "./types";
