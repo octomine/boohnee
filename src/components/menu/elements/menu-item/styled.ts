@@ -7,10 +7,11 @@ export const Plate = styled(BoxH)`
 
   margin: 1px;
 
-  border-radius: 5px;
-  background: #cccccc;
+  border-radius: ${({ theme }) => theme.radius.plate};
+  background: ${({ theme }) => theme.colors.grade['2']};
 `;
 
 export const Label = styled.div`
   width: calc(100% - 50px);
+  color: ${({ theme }) => theme.colors.main.dark};
 `;
