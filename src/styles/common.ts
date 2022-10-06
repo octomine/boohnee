@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BoxH } from "../components/common/box";
 
 export const IconWrapper = styled.div`
   ${({ theme }) => {
@@ -24,4 +25,13 @@ export const IconWrapper = styled.div`
     }
   }};
   background: ${({ theme, type }) => theme.icons[type]};
+`;
+
+export const Plate = styled(BoxH)`
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: ${({ theme }) => theme.lineHeight};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grade['2']};
 `;

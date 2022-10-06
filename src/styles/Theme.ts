@@ -32,7 +32,7 @@ export const Theme = {
     plate: "5px",
   },
   icons: {
-    del: 'url("./assets/remove.svg") 10px center no-repeat',
+    del: 'url("./assets/remove.svg") center no-repeat',
     shown: 'url("./assets/eye-opened.svg") center no-repeat',
     hidden: 'url("./assets/eye-closed.svg") center 25px no-repeat',
   },

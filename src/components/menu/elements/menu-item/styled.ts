@@ -1,13 +1,4 @@
 import styled from "styled-components";
-import { BoxH } from "../../../common/box";
-
-export const Plate = styled(BoxH)`
-  align-items: center;
-  justify-content: space-between;
-
-  height: ${({ theme }) => theme.lineHeight};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grade['2']};
-`;
 
 export const Label = styled.div`
   ${({ theme }) => theme.font.family}
