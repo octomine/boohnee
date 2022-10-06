@@ -1,4 +1,5 @@
 export interface MenuItemProps {
+  visible: boolean;
   children: string;
-  onClick: () => void;
+  changeVisible: () => void;
 }

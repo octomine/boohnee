@@ -5,13 +5,14 @@ export const Plate = styled(BoxH)`
   align-items: center;
   justify-content: space-between;
 
-  margin: 1px;
-
-  border-radius: ${({ theme }) => theme.radius.plate};
-  background: ${({ theme }) => theme.colors.grade['2']};
+  height: ${({ theme }) => theme.lineHeight};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grade['2']};
 `;
 
 export const Label = styled.div`
-  width: calc(100% - 50px);
-  color: ${({ theme }) => theme.colors.main.dark};
+  ${({ theme }) => theme.font.family}
+  width: calc(100% - 100px);
+  padding: 0 15px;
+  color: ${({ theme, visible }) => visible ? theme.colors.main.dark : theme.colors.secondary};
+  font-size: ${({ theme }) => theme.font.size.m}
 `;
