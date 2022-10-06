@@ -1,10 +1,9 @@
 import React from "react";
 
-import { Plate } from "../../../../styles/common";
 import { ButtonIcon } from "../../../common/button-icon";
 
 import { OrderItemProps } from "./types";
-import { Label, Time } from "./styled";
+import { Plate, Label, Time } from "./styled";
 
 export const OrderItem: React.FC<OrderItemProps> = ({ children }) => {
   const { text, time, visible } = children;

@@ -24,7 +24,9 @@ export const Theme = {
       4: "#91928e",
     },
     diff: {
-      warn: "#FF5F5F"
+      warn: "#FF5F5F",
+      warnLight: "#FFD4D4",
+      successLight: "#B2EDC6"
     }
   },
   radius: {

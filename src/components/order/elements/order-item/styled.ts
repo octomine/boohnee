@@ -1,4 +1,11 @@
 import styled from "styled-components";
+import { Plate as PlateBase } from '../../../../styles/common';
+
+export const Plate = styled(PlateBase)`
+  &:active {
+    background: ${({ theme }) => theme.colors.diff.successLight};
+  }
+`;
 
 export const Label = styled.div`
   ${({ theme }) => theme.font.family}
