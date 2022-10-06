@@ -3,7 +3,8 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { Theme } from "../../styles/Theme";
 import { RadioGroup } from "../radio-group";
-import { Menu } from "../menu/Menu";
+import { Menu } from "../menu";
+import { Order } from "../order";
 
 import { Container } from "./styled";
 import { useStore } from "effector-react";
@@ -19,7 +20,7 @@ function App() {
           {[{ label: "МЕНЮ" }, { label: "ЗАКАЗ", info: "7 новых" }]}
         </RadioGroup>
         {selected === 0 && <Menu></Menu>}
-        {selected === 1 && <div></div>}
+        {selected === 1 && <Order></Order>}
       </Container>
     </ThemeProvider>
   );

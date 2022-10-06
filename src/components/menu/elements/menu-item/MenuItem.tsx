@@ -1,11 +1,11 @@
 import React from "react";
 
-// import { ButtonSwitch } from "../../../common/button-switch";
 import { ButtonIcon } from "../../../common/button-icon";
 
 import { MenuItemProps } from "./types";
 
-import { Plate, Label } from "./styled";
+import { Label } from "./styled";
+import { Plate } from "../../../../styles/common";
 
 export const MenuItem: React.FC<MenuItemProps> = ({
   visible,
