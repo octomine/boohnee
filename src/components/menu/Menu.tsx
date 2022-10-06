@@ -1,26 +1,25 @@
 import React from "react";
 import { useStore } from "effector-react";
 
-import { Button } from "../common/button";
-
 import { MenuItem } from "./elements/menu-item";
 import { Container } from "./styled";
 
-import { $menu } from "./store";
+import { $menu, changeVisible } from "./store";
 
 export const Menu: React.FC<{}> = () => {
   const list = useStore($menu);
 
   const onItem = (n: number) => {
     console.log(`onItem: ${n}`);
+    changeVisible(n);
   };
 
   return (
     <Container>
-      <Button>сохранить</Button>
-      <Button>добавить</Button>
-      {list.map((item, index) => (
-        <MenuItem onClick={() => onItem(index)}>{item}</MenuItem>
+      {list.map(({ text, visible }, index) => (
+        <MenuItem visible={visible} changeVisible={() => onItem(index)}>
+          {text}
+        </MenuItem>
       ))}
     </Container>
   );

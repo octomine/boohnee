@@ -1,21 +1,33 @@
 import React from "react";
 
-import { Button } from "../common/button";
-
 import { RadioGroupProps } from "./types";
 import { Plate } from "./styled";
 
-export const RadioGroup: React.FC<RadioGroupProps> = (
-  {
-    // children,
-    // onSelect,
-  }
-) => {
+import { RadioButton } from "./elements/radio-button";
+
+import { setSelected, $selected } from "./store";
+import { useStore } from "effector-react";
+
+export const RadioGroup: React.FC<RadioGroupProps> = ({ children }) => {
+  const selected = useStore($selected);
+
+  const onSelect = (n: number) => {
+    setSelected(n);
+  };
+
   return (
     <Plate>
-      {/* {children.map(({ label }, index) => {
-        return <Button onClick={() => onSelect(index)}>{label}</Button>;
-      })} */}
+      {children.map(({ label, info }, index) => {
+        return (
+          <RadioButton
+            isSelected={selected === index}
+            onClick={() => onSelect(index)}
+            info={info}
+          >
+            {label}
+          </RadioButton>
+        );
+      })}
     </Plate>
   );
 };
