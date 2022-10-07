@@ -19,7 +19,7 @@ const getStyles = (type: string) => {
   }
 };
 
-export const IconWrapper = styled.div`
+export const IconWrapper = styled.div<{type:string}>`
   ${({ theme }) => {
     const d = theme.lineHeight;
     const arr = [

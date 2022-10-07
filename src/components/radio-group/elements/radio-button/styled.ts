@@ -12,7 +12,7 @@ const unselected = css`
 `;
 
 // TODO: !!! width !!!
-export const Wrapper = styled(BoxV)`
+export const Wrapper = styled(BoxV) <{ isSelected: boolean }>`
   ${({ theme }) => theme.font.family}
   height: 43px;
   width: 250px;

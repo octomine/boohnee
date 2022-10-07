@@ -15,11 +15,12 @@ app.listen(PORT, () => {
   console.log(`listening port: ${PORT}`);
 });
 app.post("/", (req, res) => {
-  list = req.body.map((name, index) => [{ text: name, callback_data: index }]);
+  console.log("post");
   res.send("done");
 });
 app.get("/menu", (req, res) => {
-  res.send(list);
+  console.log("get");
+  res.send("done");
 });
 
 // bot.on("message", (msg) => {
