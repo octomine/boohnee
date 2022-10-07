@@ -3,7 +3,15 @@ import { BoxH } from "../components/common/box";
 
 const getStyles = (type: string) => {
   switch (type) {
+    case 'accept':
+      return css`
+        border-color: ${({ theme }) => theme.colors.diff.success};
+        &:active {
+          background: ${({ theme }) => `${theme.icons[type]}, ${theme.colors.diff.successLight}`};
+        }
+      `;
     case 'del':
+    case 'decline':
       return css`
         border-color: ${({ theme }) => theme.colors.diff.warn};
         &:active {
@@ -19,7 +27,7 @@ const getStyles = (type: string) => {
   }
 };
 
-export const IconWrapper = styled.div<{type:string}>`
+export const IconWrapper = styled.div<{ type: string }>`
   ${({ theme }) => {
     const d = theme.lineHeight;
     const arr = [

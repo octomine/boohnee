@@ -26,6 +26,7 @@ export const Theme = {
     diff: {
       warn: "#FF5F5F",
       warnLight: "#FFD4D4",
+      success: "#29A653",
       successLight: "#B2EDC6"
     }
   },
@@ -37,6 +38,8 @@ export const Theme = {
     del: 'url("./assets/remove.svg") center no-repeat',
     shown: 'url("./assets/eye-opened.svg") center no-repeat',
     hidden: 'url("./assets/eye-closed.svg") center 25px no-repeat',
+    accept: 'url("./assets/accept.svg") center no-repeat',
+    decline: 'url("./assets/decline.svg") center no-repeat',
   },
   lineHeight: '50px'
 }

@@ -11,12 +11,13 @@ export const MenuItem: React.FC<MenuItemProps> = ({
   visible,
   children,
   changeVisible,
+  removeItem,
 }) => {
   return (
     <Plate>
       <Label visible={visible}>{children}</Label>
       <ButtonIcon type={visible ? "shown" : "hidden"} onClick={changeVisible} />
-      <ButtonIcon type="del" onClick={() => console.log("CLICK!!1")} />
+      <ButtonIcon type="del" onClick={removeItem} />
     </Plate>
   );
 };

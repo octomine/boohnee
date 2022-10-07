@@ -4,14 +4,17 @@ import { ThemeProvider } from "styled-components";
 import { Theme } from "../../styles/Theme";
 import { RadioGroup } from "../radio-group";
 import { Menu } from "../menu";
-import { Button } from "../common/button";
+import { ItemAdd } from "../item-add";
 import { Order } from "../order";
 
 import { Container } from "./styled";
 import { useStore } from "effector-react";
 import { $selected } from "../radio-group/store";
+import { getMenuFx } from "../../effects";
 
 function App() {
+  getMenuFx();
+  
   const selected = useStore($selected);
 
   return (
@@ -23,7 +26,7 @@ function App() {
         {selected === 0 && (
           <>
             <Menu></Menu>
-            <Button>Добавить</Button>
+            <ItemAdd></ItemAdd>
           </>
         )}
         {selected === 1 && <Order></Order>}
