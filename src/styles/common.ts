@@ -1,7 +1,25 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { BoxH } from "../components/common/box";
 
-export const IconWrapper = styled.div`
+const getStyles = (type: string) => {
+  switch (type) {
+    case 'del':
+      return css`
+        border-color: ${({ theme }) => theme.colors.diff.warn};
+        &:active {
+          background: ${({ theme }) => `${theme.icons[type]}, ${theme.colors.diff.warnLight}`};
+        }
+      `;
+    case 'shown':
+      return css`border-color: ${({ theme }) => theme.colors.secondary};`;
+    case 'hidden':
+      return css`border-color: ${({ theme }) => theme.colors.grade['3']};`;
+    default:
+      return null;
+  }
+};
+
+export const IconWrapper = styled.div<{type:string}>`
   ${({ theme }) => {
     const d = theme.lineHeight;
     const arr = [
@@ -12,18 +30,7 @@ export const IconWrapper = styled.div`
   }}
   margin: 0 2px;
   border-bottom: 2px solid;
-  border-color: ${({ theme, type }) => {
-    switch (type) {
-      case 'del':
-        return theme.colors.diff.warn;
-      case 'shown':
-        return theme.colors.secondary;
-      case 'hidden':
-        return theme.colors.grade['3'];
-      default:
-        return null;
-    }
-  }};
+  ${({ type }) => getStyles(type)}
   background: ${({ theme, type }) => theme.icons[type]};
 `;
 

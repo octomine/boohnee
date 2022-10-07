@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import { Theme } from "../../styles/Theme";
 import { RadioGroup } from "../radio-group";
 import { Menu } from "../menu";
+import { Button } from "../common/button";
 import { Order } from "../order";
 
 import { Container } from "./styled";
@@ -19,7 +20,12 @@ function App() {
         <RadioGroup>
           {[{ label: "МЕНЮ" }, { label: "ЗАКАЗ", info: "7 новых" }]}
         </RadioGroup>
-        {selected === 0 && <Menu></Menu>}
+        {selected === 0 && (
+          <>
+            <Menu></Menu>
+            <Button>Добавить</Button>
+          </>
+        )}
         {selected === 1 && <Order></Order>}
       </Container>
     </ThemeProvider>

@@ -10,7 +10,6 @@ export const Menu: React.FC<{}> = () => {
   const list = useStore($menu);
 
   const onItem = (n: number) => {
-    console.log(`onItem: ${n}`);
     changeVisible(n);
   };
 

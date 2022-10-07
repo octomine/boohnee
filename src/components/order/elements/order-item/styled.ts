@@ -1,6 +1,13 @@
 import styled from "styled-components";
+import { Plate as PlateBase } from '../../../../styles/common';
 
-export const Label = styled.div`
+export const Plate = styled(PlateBase)`
+  &:active {
+    background: ${({ theme }) => theme.colors.diff.successLight};
+  }
+`;
+
+export const Label = styled.div<{ visible: boolean }>`
   ${({ theme }) => theme.font.family}
   width: calc(100% - 100px);
   padding: 0 15px;
@@ -8,7 +15,7 @@ export const Label = styled.div`
   font-size: ${({ theme }) => theme.font.size.m};
 `;
 
-export const Time = styled.div`
+export const Time = styled.div<{ visible: boolean }>`
   ${({ theme }) => theme.font.family}
   padding-right: 15px;
   text-align: right;

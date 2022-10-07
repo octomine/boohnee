@@ -10,6 +10,23 @@ const defaultState = [
   { id: 1, text: 'Красная стрела с шампанским', visible: true },
   { id: 2, text: 'Красная стрела с тоником, мятой и всяким таким', visible: true },
   { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
+  { id: 3, text: 'Красная стрела с ещё чем-то там', visible: false },
 ]
 
 export const changeVisible = createEvent<number>();
