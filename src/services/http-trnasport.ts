@@ -41,6 +41,7 @@ export class HTTPTransport {
       fetch(`${this.endpoint}${path}`, {
         method,
         headers,
+        mode: 'cors',
         body: JSON.stringify(data)
       }).then((data) => resolve(data.json()))
     });
