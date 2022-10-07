@@ -1,4 +1,4 @@
-import { createStore, createEvent } from 'effector';
+import { createStore } from 'effector';
 import { TMenuItemModel } from '../../api/APIMenu';
 import { getMenuFx } from '../../effects';
 

@@ -1,7 +1,9 @@
 import React from "react";
+import { useStore } from "effector-react";
 
 import { setValue, $value } from "./store";
-import { useStore } from "effector-react";
+
+import { Field } from "./styled";
 
 export const Input = () => {
   const value = useStore($value);
@@ -10,5 +12,5 @@ export const Input = () => {
     setValue(evt.target.value);
   };
 
-  return <input onChange={onChange} value={value} />;
+  return <Field rows={2} onChange={onChange} value={value} />;
 };
