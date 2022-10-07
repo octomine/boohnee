@@ -14,13 +14,23 @@ app.use(express.static("./build"));
 app.listen(PORT, () => {
   console.log(`listening port: ${PORT}`);
 });
-app.post("/", (req, res) => {
-  console.log("post");
-  res.send("done");
+
+app.put("/menu/add", (req, res) => {
+  list.push(req.body);
+  res.send({ code: 0 });
+});
+app.put("/menu/remove", (req, res) => {
+  list = list.filter((item) => item.id !== req.body.id);
+  res.send({ code: 0 });
+});
+app.put("/menu/change", (req, res) => {
+  list = list.map((item) =>
+    item.id === req.body.id ? { ...req.body } : { ...item }
+  );
+  res.send({ code: 0 });
 });
 app.get("/menu", (req, res) => {
-  console.log("get");
-  res.send("done");
+  res.send(list);
 });
 
 // bot.on("message", (msg) => {
