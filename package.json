@@ -23,7 +23,7 @@
   },
   "scripts": {
     "server": "PORT=3000 node ./src/server.js",
-    "start": "npm run build && npm run server",
+    "start": "node ./src/server.js",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
