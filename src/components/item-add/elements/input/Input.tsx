@@ -8,7 +8,7 @@ import { Field } from "./styled";
 export const Input = () => {
   const value = useStore($value);
 
-  const onChange = (evt: React.ChangeEvent) => {
+  const onChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(evt.target.value);
   };
 

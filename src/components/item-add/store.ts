@@ -1,4 +1,4 @@
-import { createEvent, createStore, sample, forward } from 'effector';
+import { createEvent, createStore, sample } from 'effector';
 
 import { addItemFx } from '../../effects'
 import { $value } from './elements/input/store';
@@ -11,7 +11,8 @@ export const $inputMode = createStore<boolean>(false)
 
 export const onAccept = createEvent();
 
-forward({
-  from: sample($value, onAccept),
-  to: addItemFx,
-})
+sample({
+  source: $value,
+  clock: onAccept,
+  target: addItemFx
+});
