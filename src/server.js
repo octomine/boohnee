@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
-const io = new ws.Server({ port: 9000 });
+const io = new ws.Server({ port: 5000 });
 let wsClient;
 
 // SOCKET
