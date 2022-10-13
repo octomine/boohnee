@@ -1,7 +1,7 @@
 export interface OrderItemProps {
   children: {
     text: string;
-    time: string;
+    time: Date;
     visible: boolean;
   }
 }

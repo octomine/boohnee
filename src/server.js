@@ -1,4 +1,7 @@
 const express = require("express");
+const http = require("http");
+const ws = require("ws");
+
 // const TelegramBot = require("node-telegram-bot-api");
 
 // const TOKEN = "5709768801:AAEY5MGCs18GsK8rtyQ1NvXgeIgFf2voDww";
@@ -7,16 +10,33 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const server = http.createServer(app);
+const io = new ws.Server({ port: 9000 });
+let wsClient;
+
+// SOCKET
+io.on("connection", (wsc) => {
+  wsClient = wsc;
+  wsClient.on("message", (msg) => {
+    console.log(msg);
+  });
+  console.log("CONNECTED!!1");
+});
+
 let list = [];
 
 app.use(express.json());
 app.use(express.static("./build"));
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`listening port: ${PORT}`);
 });
 
+// SERVER
 app.put("/menu/add", (req, res) => {
   list.push(req.body);
+  if (wsClient) {
+    setTimeout(() => wsClient.send(req.body.id), 1000);
+  }
   res.send({ code: 0 });
 });
 app.put("/menu/remove", (req, res) => {
@@ -33,6 +53,7 @@ app.get("/menu", (req, res) => {
   res.send(list);
 });
 
+// BOT
 // bot.on("message", (msg) => {
 //   const {
 //     chat: { id },

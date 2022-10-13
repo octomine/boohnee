@@ -1,20 +1,21 @@
 import React from "react";
-
+import { useStore } from "effector-react";
 import { ThemeProvider } from "styled-components";
+
 import { Theme } from "../../styles/Theme";
 import { RadioGroup } from "../radio-group";
 import { Menu } from "../menu";
 import { ItemAdd } from "../item-add";
 import { Order } from "../order";
 
-import { Container } from "./styled";
-import { useStore } from "effector-react";
-import { $selected } from "../radio-group/store";
 import { getMenuFx } from "../../effects";
+import { $selected } from "../radio-group/store";
+
+import { Container } from "./styled";
 
 function App() {
   getMenuFx();
-  
+
   const selected = useStore($selected);
 
   return (
