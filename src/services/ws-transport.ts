@@ -4,8 +4,8 @@ class WSTransport {
   private io: WebSocket;
 
   constructor() {
-    console.log('ws created!!1');
-    this.io = new WebSocket('ws://localhost:9000');
+    const host = window.location.origin.replace(/^http/, 'ws')
+    this.io = new WebSocket(host);
 
     this.io.addEventListener('open', () => {
       console.log('socket open');
