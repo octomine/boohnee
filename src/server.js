@@ -41,14 +41,15 @@ server.get("/menu", (req, res) => {
 });
 
 // SOCKET
-const io = new Server({ server });
+// const io = new Server({ server });
+const io = new Server({ port: 5000 });
 let wsClient;
 
 io.on("connection", (wsc) => {
   wsClient = wsc;
-  wsClient.on("message", (msg) => {
-    console.log(msg);
-  });
+  // wsClient.on("message", (msg) => {
+  //   console.log(msg);
+  // });
   console.log("CONNECTED!!1");
 });
 
