@@ -5,7 +5,6 @@ class WSTransport {
 
   constructor() {
     const host = window.location.origin.replace(/^http/, 'ws')
-    // this.io = new WebSocket('ws://localhost:5000');
     this.io = new WebSocket(host);
 
     this.io.addEventListener('open', () => {
