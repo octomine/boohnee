@@ -1,6 +1,6 @@
 import { createEvent, createStore, sample } from 'effector';
 
-import { addItemFx } from '../../effects'
+import { addMenuItemFx } from '../../effects'
 import { $value } from './elements/input/store';
 
 export const onAccept = createEvent();
@@ -15,5 +15,5 @@ export const $inputMode = createStore<boolean>(false)
 sample({
   source: $value,
   clock: onAccept,
-  target: addItemFx
+  target: addMenuItemFx
 });

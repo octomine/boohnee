@@ -1,13 +1,14 @@
+const { nanoid } = require("nanoid");
 const express = require("express");
 const { Server } = require("ws");
-
-// const TelegramBot = require("node-telegram-bot-api");
-
-// const TOKEN = "5709768801:AAEY5MGCs18GsK8rtyQ1NvXgeIgFf2voDww";
-// const bot = new TelegramBot(TOKEN, { polling: true });
+const { Telegraf, Markup } = require("telegraf");
 
 const PORT = process.env.PORT || 3000;
+const TOKEN = process.env.TOKEN;
+
 let list = [];
+let order = [];
+let chats = {};
 
 // SERVER
 const app = express();
@@ -18,11 +19,9 @@ const server = app.listen(PORT, () => {
   console.log(`listening port: ${PORT}`);
 });
 
+// API menu
 app.put("/menu/add", (req, res) => {
   list.push(req.body);
-  if (wsClient) {
-    setTimeout(() => wsClient.send(req.body.id), 1000);
-  }
   res.send({ code: 0 });
 });
 app.put("/menu/remove", (req, res) => {
@@ -38,6 +37,25 @@ app.put("/menu/change", (req, res) => {
 app.get("/menu", (req, res) => {
   res.send(list);
 });
+// API order
+app.get("/order", (req, res) => {
+  res.send(order);
+});
+app.put("/order/ready", (req, res) => {
+  closeOrderItem(req.body.id);
+  res.send({ code: 0 });
+});
+app.put("/order/remove", (req, res) => {
+  closeOrderItem(req.body.id, false);
+  res.send({ code: 0 });
+});
+
+function closeOrderItem(orderId, done = true) {
+  order = order.filter(({ id }) => id !== orderId);
+  msg = done ? "готово!!1" : "не, не получится((";
+  bot.telegram.sendMessage(chats[orderId], msg);
+  delete chats[orderId];
+}
 
 // SOCKET
 const io = new Server({ server });
@@ -52,24 +70,35 @@ io.on("connection", (wsc) => {
 });
 
 // BOT
-// bot.on("message", (msg) => {
-//   const {
-//     chat: { id },
-//   } = msg;
-//   bot.sendMessage(id, "превед!!1", { reply_markup: { inline_keyboard: list } });
-// });
-// bot.on("callback_query", (query) => {
-//   const {
-//     message: {
-//       chat: { id },
-//     },
-//   } = query;
-//   console.log(query);
-//   bot.answerInlineQuery(
-//     id,
-//     [{ id: 0, type: "article", message_text: "ok", title: "test" }],
-//     {
-//       reply_markup: { inline_keyboard: list },
-//     }
-//   );
-// });
+const bot = new Telegraf(TOKEN);
+
+bot.start((ctx) =>
+  ctx.reply("HI", Markup.keyboard(list.map(({ text }) => text)))
+);
+bot.hears((value, ctx) => {
+  const {
+    update: {
+      message: {
+        chat: { id: chatId },
+      },
+    },
+  } = ctx;
+  const menuItem = list.filter(({ text }) => text === value)[0];
+  if (wsClient && menuItem) {
+    const orderItem = {
+      id: nanoid(),
+      itemId: menuItem.id,
+      text: value,
+      time: new Date(),
+      visible: menuItem.visible,
+    };
+    order.push(orderItem);
+    chats[orderItem.id] = chatId;
+    wsClient.send("update");
+    ctx.reply("ok");
+  } else {
+    ctx.reply("что-то пошло не так...");
+  }
+});
+
+bot.launch();
