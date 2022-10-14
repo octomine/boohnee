@@ -10,46 +10,44 @@ const PORT = process.env.PORT || 3000;
 let list = [];
 
 // SERVER
-const server = express();
+const app = express();
 
-server
-  .use(express.json())
-  .use(express.static("./build"))
-  .listen(PORT, () => {
-    console.log(`listening port: ${PORT}`);
-  });
+app.use(express.json()).use(express.static("./build"));
 
-server.put("/menu/add", (req, res) => {
+const server = app.listen(PORT, () => {
+  console.log(`listening port: ${PORT}`);
+});
+
+app.put("/menu/add", (req, res) => {
   list.push(req.body);
   if (wsClient) {
     setTimeout(() => wsClient.send(req.body.id), 1000);
   }
   res.send({ code: 0 });
 });
-server.put("/menu/remove", (req, res) => {
+app.put("/menu/remove", (req, res) => {
   list = list.filter((item) => item.id !== req.body.id);
   res.send({ code: 0 });
 });
-server.put("/menu/change", (req, res) => {
+app.put("/menu/change", (req, res) => {
   list = list.map((item) =>
     item.id === req.body.id ? { ...req.body } : { ...item }
   );
   res.send({ code: 0 });
 });
-server.get("/menu", (req, res) => {
+app.get("/menu", (req, res) => {
   res.send(list);
 });
 
 // SOCKET
-// const io = new Server({ server });
-const io = new Server({ port: 5000 });
+const io = new Server({ server });
 let wsClient;
 
 io.on("connection", (wsc) => {
   wsClient = wsc;
-  // wsClient.on("message", (msg) => {
-  //   console.log(msg);
-  // });
+  wsClient.on("message", (msg) => {
+    console.log(msg);
+  });
   console.log("CONNECTED!!1");
 });
 
