@@ -1,4 +1,4 @@
-import { onSocketMessage } from './events';
+import { getOrderFx } from '../effects';
 
 class WSTransport {
   private io: WebSocket;
@@ -12,7 +12,12 @@ class WSTransport {
     });
 
     this.io.addEventListener('message', (evt: MessageEvent) => {
-      onSocketMessage(evt.data);
+      switch (evt.data) {
+        case 'update':
+          getOrderFx();
+          break;
+        default:
+      }
     });
   }
 

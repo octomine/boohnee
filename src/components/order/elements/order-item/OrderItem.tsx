@@ -1,19 +1,23 @@
 import React from "react";
 
+import { Plate } from "../../../../styles/common";
 import { ButtonIcon } from "../../../common/button-icon";
 
 import { OrderItemProps } from "./types";
-import { Plate, Label, Time } from "./styled";
+import { Label, Time, Ready } from "./styled";
+import { removeOrderItemFx, readyOrderItemFx } from "../../../../effects";
 
 export const OrderItem: React.FC<OrderItemProps> = ({ children }) => {
-  const { text, time, visible } = children;
-  const timeSpent: number = new Date().getTime() - time.getTime();
+  const { id, text, time, visible } = children;
+  const timeSpent: number = new Date().getTime() - new Date(time).getTime();
 
   return (
     <Plate>
-      <ButtonIcon type="del" onClick={() => console.log("REMOVE!!1")} />
-      <Label visible={visible}>{text}</Label>
-      <Time visible={visible}>{timeSpent}</Time>
+      <ButtonIcon type="del" onClick={() => removeOrderItemFx(id)} />
+      <Ready onClick={() => readyOrderItemFx(id)}>
+        <Label visible={visible}>{text}</Label>
+        <Time visible={visible}>{timeSpent}</Time>
+      </Ready>
     </Plate>
   );
 };

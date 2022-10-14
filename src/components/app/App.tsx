@@ -8,13 +8,14 @@ import { Menu } from "../menu";
 import { ItemAdd } from "../item-add";
 import { Order } from "../order";
 
-import { getMenuFx } from "../../effects";
+import { getMenuFx, getOrderFx } from "../../effects";
 import { $selected } from "../radio-group/store";
 
 import { Container } from "./styled";
 
 function App() {
   getMenuFx();
+  getOrderFx();
 
   const selected = useStore($selected);
 
@@ -22,7 +23,7 @@ function App() {
     <ThemeProvider theme={Theme}>
       <Container>
         <RadioGroup>
-          {[{ label: "МЕНЮ" }, { label: "ЗАКАЗ", info: "7 новых" }]}
+          {[{ label: "МЕНЮ" }, { label: "ЗАКАЗ" /* , info: "7 новых" */ }]}
         </RadioGroup>
         {selected === 0 && (
           <>

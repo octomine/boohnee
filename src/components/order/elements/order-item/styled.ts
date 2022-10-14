@@ -1,7 +1,13 @@
 import styled from "styled-components";
-import { Plate as PlateBase } from '../../../../styles/common';
+import { BoxH } from "../../../common/box";
 
-export const Plate = styled(PlateBase)`
+export const Ready = styled(BoxH)`
+  align-items: center;
+  justify-content: space-between;
+
+  width: calc(100% - 60px);
+  height: 100%;
+
   &:active {
     background: ${({ theme }) => theme.colors.diff.successLight};
   }

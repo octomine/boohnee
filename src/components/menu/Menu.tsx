@@ -5,18 +5,18 @@ import { MenuItem } from "./elements/menu-item";
 import { Container } from "./styled";
 
 import { $menu } from "./store";
-import { changeItemFx, removeItemFx } from "../../effects";
+import { changeMenuItemFx, removeMenuItemFx } from "../../effects";
 
 export const Menu: React.FC<{}> = () => {
   const list = useStore($menu);
 
   const onItem = (n: number) => {
     const objToSend = { ...list[n], visible: !list[n].visible };
-    changeItemFx(objToSend);
+    changeMenuItemFx(objToSend);
   };
 
   const onRemove = (n: number) => {
-    removeItemFx(list[n]);
+    removeMenuItemFx(list[n]);
   };
 
   return (
