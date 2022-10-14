@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import PropTypes from 'prop-types'
 import { BoxV } from "../../../common/box";
 
 const selected = css`
@@ -19,10 +18,6 @@ export const Wrapper = styled(BoxV) <{ isSelected: boolean }>`
 
   ${({ isSelected }) => isSelected ? selected : unselected}
 `;
-
-Wrapper.propTypes = {
-  isSelected: PropTypes.bool.isRequired,
-}
 
 export const Label = styled.div`
   text-align: center;
