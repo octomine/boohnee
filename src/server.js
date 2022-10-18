@@ -65,6 +65,7 @@ io.on("connection", (wsc) => {
   wsClient = wsc;
   wsClient.on("message", (msg) => {
     console.log(msg);
+    wsClient.send("pong");
   });
   console.log("CONNECTED!!1");
 });
