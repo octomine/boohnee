@@ -2,6 +2,7 @@ import { getOrderFx } from '../effects';
 
 class WSTransport {
   private io: WebSocket;
+  private intervalId!: NodeJS.Timer;
 
   constructor() {
     const host = window.location.origin.replace(/^http/, 'ws')
@@ -9,7 +10,14 @@ class WSTransport {
 
     this.io.addEventListener('open', () => {
       console.log('socket open');
+      this.intervalId = setInterval(() => {
+        this.send('ping');
+      }, 3 * 1000)
     });
+
+    this.io.addEventListener('close', () => {
+      clearInterval(this.intervalId);
+    })
 
     this.io.addEventListener('message', (evt: MessageEvent) => {
       switch (evt.data) {
