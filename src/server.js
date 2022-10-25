@@ -20,26 +20,34 @@ const server = app.listen(PORT, () => {
 });
 
 // API menu
-app.put("/menu/add", (req, res) => {
-  list.push(req.body);
-  res.send({ code: 0 });
-});
-app.put("/menu/remove", (req, res) => {
-  list = list.filter((item) => item.id !== req.body.id);
-  res.send({ code: 0 });
-});
-app.put("/menu/change", (req, res) => {
-  list = list.map((item) =>
-    item.id === req.body.id ? { ...req.body } : { ...item }
-  );
-  res.send({ code: 0 });
-});
 app.get("/menu", (req, res) => {
   res.send(list);
 });
+app.put("/menu/add", (req, res) => {
+  list.push(req.body);
+  const { id, text } = req.body;
+  if (!order[id]) {
+    order[id] = { text, visible: true, items: [] };
+  }
+  res.send({ code: 0 });
+});
+app.put("/menu/remove", (req, res) => {
+  const { id } = req.body.id;
+  list = list.filter((item) => item.id !== id);
+  order[id] = null;
+  res.send({ code: 0 });
+});
+app.put("/menu/change", (req, res) => {
+  const { id, visible } = req.body;
+  list = list.map((item) => (item.id === id ? { ...req.body } : { ...item }));
+  order[id].visible = visible;
+  res.send({ code: 0 });
+});
 // API order
 app.get("/order", (req, res) => {
-  res.send(order);
+  console.log(order);
+  const resToSend = Object.keys(order).map((id) => ({ id, ...order[id] }));
+  res.send(resToSend);
 });
 app.put("/order/ready", (req, res) => {
   closeOrderItem(req.body.id);
@@ -51,7 +59,7 @@ app.put("/order/remove", (req, res) => {
 });
 
 function closeOrderItem(orderId, done = true) {
-  order = order.filter(({ id }) => id !== orderId);
+  // order = order.filter(({ id }) => id !== orderId); TODO: !!!
   msg = done ? "готово!!1" : "не, не получится((";
   bot.telegram.sendMessage(chats[orderId], msg);
   delete chats[orderId];
@@ -84,16 +92,15 @@ bot.hears((value, ctx) => {
       },
     },
   } = ctx;
+
   const menuItem = list.filter(({ text }) => text === value)[0];
   if (wsClient && menuItem) {
+    const { id } = menuItem;
     const orderItem = {
       id: nanoid(),
-      itemId: menuItem.id,
-      text: value,
       time: new Date(),
-      visible: menuItem.visible,
     };
-    order.push(orderItem);
+    order[id].items.push(orderItem);
     chats[orderItem.id] = chatId;
     wsClient.send("update");
     ctx.reply("ok");

@@ -5,10 +5,12 @@ import { getOrderFx } from '../../effects';
 
 export type TOrderItemModel = {
   id: string;
-  itemId: string;
   text: string;
-  time: Date;
   visible: boolean;
+  items: {
+    itemId: string;
+    time: Date;
+  }[];
 }
 
 export const $order = createStore<TOrderItemModel[]>([])
